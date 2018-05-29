@@ -1,0 +1,67 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "User bets service"
+host: "localhost"
+basePath: "/user-bets"
+paths:
+  /bets/bet:
+    post:
+      tags:
+      - "bets"
+      summary: "Make a bet"
+      description: ""
+      operationId: "makeBet"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Bet"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid Bet"
+    put:
+      tags:
+      - "bets"
+      summary: "Update a bet"
+      description: ""
+      operationId: "updateBet"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Bet"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid Bet"
+        404:
+          description: "Bet not found"
+definitions:
+  Bet:
+    type: "object"
+    properties:
+      betId:
+        type: "string"
+      gameId:
+        type: "string"
+      userId:
+        type: "string"
+      homeScore:
+        type: "integer"
+        format: "int32"
+      visitorScore:
+        type: "integer"
+        format: "int32"
+      betDate:
+        type: "string"
+        format: "date-time"
