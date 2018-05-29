@@ -5,7 +5,7 @@ info:
 host: "localhost"
 basePath: "/user-bets"
 paths:
-  /bets/bet:
+  /api/bet:
     post:
       tags:
       - "bets"
@@ -52,16 +52,16 @@ definitions:
     properties:
       betId:
         type: "string"
-      gameId:
+      matchId:
         type: "string"
       userId:
         type: "string"
-      homeScore:
+      homeResult:
         type: "integer"
         format: "int32"
-      visitorScore:
+      awayResult:
         type: "integer"
         format: "int32"
-      betDate:
+      registeredAt:
         type: "string"
         format: "date-time"
