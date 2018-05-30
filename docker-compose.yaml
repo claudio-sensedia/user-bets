@@ -7,3 +7,17 @@ services:
       - ./data/db:/data/db
     ports:
       - 27017:27017
+    networks:
+      - user-bets-net
+  rabbitmq:
+    hostname: rabbitmq
+    container_name: "rabbitmq"
+    image: rabbitmq:3.7.4-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - user-bets-net
+networks:
+  user-bets-net:
+    driver: bridge
