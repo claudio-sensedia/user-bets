@@ -6,6 +6,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
+    username: guest
+    password: guest
   data:
     mongodb:
       database: "USER-BETS"
@@ -16,3 +18,8 @@ match:
   result:
     queue: result
     key: result
+ranking:
+  exchange: bets
+  user:
+    queue: points
+    key: points
