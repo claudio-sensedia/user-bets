@@ -3,7 +3,7 @@ info:
   version: "1.0.0"
   title: "User bets service"
 host: "localhost"
-basePath: "/user-bets"
+basePath: "/sensedia-bet"
 paths:
   /api/bet:
     post:
@@ -50,11 +50,7 @@ definitions:
   Bet:
     type: "object"
     properties:
-      betId:
-        type: "string"
       matchId:
-        type: "string"
-      userId:
         type: "string"
       homeResult:
         type: "integer"
@@ -62,6 +58,3 @@ definitions:
       awayResult:
         type: "integer"
         format: "int32"
-      registeredAt:
-        type: "string"
-        format: "date-time"

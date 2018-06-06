@@ -1,12 +1,9 @@
 package com.sensedia.userbets.domain.resource;
 
-import com.sensedia.userbets.domain.MatchResult;
 import com.sensedia.userbets.domain.UserBet;
 import com.sensedia.userbets.domain.service.UserBetsService;
 import javax.validation.Valid;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
