@@ -1,6 +1,7 @@
 package com.sensedia.userbets.domain.service;
 
 import com.sensedia.userbets.domain.MatchResult;
+import com.sensedia.userbets.domain.User;
 import com.sensedia.userbets.domain.UserBet;
 import com.sensedia.userbets.domain.UserPointsResult;
 import com.sensedia.userbets.domain.repository.UserBetsRepository;
@@ -8,6 +9,8 @@ import com.sensedia.userbets.domain.score.ScorePoints;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +29,7 @@ public class UserBetsService {
   public UserBet makeBet(UserBet userBet) {
     userBet.setBetId(UUID.randomUUID().toString());
     userBet.setRegisteredAt(LocalDateTime.now());
+    userBet.setUserId(this.getUser().getUserId());
     return this.userBetsRepository.save(userBet);
   }
 
@@ -75,4 +79,12 @@ public class UserBetsService {
     return sumPoints;
   }
 
+  private User getUser() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    return (User) auth.getPrincipal();
+  }
+
+  public Iterable<UserBet> getBets() {
+    return this.userBetsRepository.findByUserId(this.getUser().getUserId());
+  }
 }

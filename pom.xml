@@ -32,6 +32,10 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
     <dependency>
@@ -45,6 +49,7 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-jwt</artifactId>
+      <version>1.0.9.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -83,7 +88,7 @@
         <configuration>
           <images>
             <image>
-              <name>sensedia/${project.build.finalName}</name>
+              <name>${project.build.finalName}</name>
               <build>
                 <from>openjdk:latest</from>
                 <entryPoint>java -jar /application/${project.build.finalName}.jar</entryPoint>

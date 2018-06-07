@@ -4,6 +4,7 @@ import com.sensedia.userbets.domain.UserBet;
 import com.sensedia.userbets.domain.service.UserBetsService;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,11 @@ public class UserBetsResource {
   @PostMapping
   public ResponseEntity<?> makeBet(@Valid @RequestBody UserBet userBet) {
     return ResponseEntity.ok(this.userBetsService.makeBet(userBet));
+  }
+
+  @GetMapping
+  public ResponseEntity<?> getBets() {
+    return ResponseEntity.ok(this.userBetsService.getBets());
   }
 
 }
