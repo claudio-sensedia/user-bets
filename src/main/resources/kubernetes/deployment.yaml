@@ -33,7 +33,7 @@ metadata:
   namespace: development
 spec:
   selector:
-    app: "user-betis"
+    app: "user-bets"
   ports:
   - name: http
     port: 9999
