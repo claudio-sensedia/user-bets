@@ -9,10 +9,12 @@ import com.sensedia.userbets.domain.score.ScorePoints;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class UserBetsService {
 
@@ -36,10 +38,11 @@ public class UserBetsService {
   public void sendScore(MatchResult matchResult) {
     List<UserBet> lsBets = this.userBetsRepository.findByMatchId(matchResult.getMatchId());
 
-    lsBets.forEach(userBet -> {
-      this.rankingService.send(UserPointsResult.builder().userId(userBet.getUserId())
-          .betId(userBet.getBetId()).points(this.getScorePoints(userBet, matchResult)).build());
-    });
+    log.info("Numbers of bets -> matchId={} -> size={}", matchResult.getMatchId(), lsBets.size());
+
+    lsBets.forEach(
+        userBet -> this.rankingService.send(UserPointsResult.builder().userId(userBet.getUserId())
+            .betId(userBet.getBetId()).points(this.getScorePoints(userBet, matchResult)).build()));
   }
 
   private Long getScorePoints(UserBet userBet, MatchResult matchResult) {
