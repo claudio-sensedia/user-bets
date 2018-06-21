@@ -7,10 +7,9 @@ import com.sensedia.userbets.domain.UserPointsResult;
 import com.sensedia.userbets.domain.repository.UserBetsRepository;
 import com.sensedia.userbets.domain.score.ScorePoints;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
+import lombok.val;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +35,14 @@ public class UserBetsService {
   }
 
   public void sendScore(MatchResult matchResult) {
-    List<UserBet> lsBets = this.userBetsRepository.findByMatchId(matchResult.getMatchId());
+    val lsBets = this.userBetsRepository.findByMatchId(matchResult.getMatchId());
 
     log.info("Numbers of bets -> matchId={} -> size={}", matchResult.getMatchId(), lsBets.size());
 
     lsBets.forEach(
         userBet -> this.rankingService.send(UserPointsResult.builder().userId(userBet.getUserId())
-            .betId(userBet.getBetId()).points(this.getScorePoints(userBet, matchResult)).build()));
+            .betId(userBet.getBetId()).points(this.getScorePoints(userBet, matchResult))
+            .matchId(matchResult.getMatchId()).registeredAt(userBet.getRegisteredAt()).build()));
   }
 
   private Long getScorePoints(UserBet userBet, MatchResult matchResult) {
@@ -83,7 +83,7 @@ public class UserBetsService {
   }
 
   private User getUser() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    val auth = SecurityContextHolder.getContext().getAuthentication();
     return (User) auth.getPrincipal();
   }
 
