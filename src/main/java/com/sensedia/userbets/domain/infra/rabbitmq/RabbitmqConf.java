@@ -1,5 +1,6 @@
 package com.sensedia.userbets.domain.infra.rabbitmq;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -45,4 +46,10 @@ public class RabbitmqConf {
   public RestTemplate restTemplate() {
     return new RestTemplate();
   }
+
+  @Bean
+  public ObjectMapper objectMapper() {
+    return new ObjectMapper();
+  }
+
 }
